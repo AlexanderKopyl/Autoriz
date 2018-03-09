@@ -1,0 +1,43 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+a{
+    text-decoration: none;
+    padding: 10px;
+    background-color: green;
+    color:  #eee;
+
+}
+#btn_submit{
+    cursor: pointer;
+    border: none;
+    padding: 11px;
+    color:  #eee;
+    background-color: green;
+}
+#password{
+    margin-bottom: 10px;
+}
+.box {
+    text-align: center;
+    width: 50%;
+    margin: auto;
+}
+.box form{
+    
+    width: 50%;
+    margin: 100px auto 100px auto;
+    padding: 48px 10px;
+    border: 1px solid blue;
+}
+input {
+    padding: 6px 12px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+label {
+    font-size: 18px;
+    font-family: sans-serif;
+}
