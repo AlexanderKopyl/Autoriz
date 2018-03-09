@@ -9,7 +9,7 @@ $name = trim($_POST['name']);
 $email = $_POST['email'];
 
 if (count($_POST) > 0) {
-    mysqli_query($db, "INSERT INTO `reg`(`name`, `password`, `email`) VALUES (' " .$name. " ',' " .$password. " ', '" .$email. "')");
+    mysqli_query($db, "INSERT INTO reg (`name`, `password`, `email`) VALUES (\"$name\",\"$password\",\"$email\")");
     header("Location: index.php");
     exit;
 }

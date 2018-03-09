@@ -1,5 +1,5 @@
 <?php
-//session_start();
+session_start();
 $db = mysqli_connect('localhost', 'root', '');
 mysqli_select_db($db, 'WMI TEst');
 mysqli_query($db, "SET NAMES utf8");
@@ -7,37 +7,51 @@ mysqli_query($db, "SET NAMES utf8");
 $name = $_POST['name'];
 $password = md5($_POST['password']);
 $sql = "SELECT * FROM reg WHERE `name` = '$name'";
+
 $request = mysqli_query($db, $sql);
 $fetch = mysqli_fetch_all($request, MYSQLI_ASSOC);
 
 if (count($_POST) > 0) {
-    $sql = "SELECT * FROM reg WHERE `name` = $name";
-    $request = mysqli_query($db, $sql);
-    $fetch = mysqli_fetch_all($request, MYSQLI_ASSOC);
-    if ($fetch) {
-        foreach ($fetch as $key => $value) {
 
-            $user_name = $fetch[$key]['name'];
-            $user_password = $fetch[$key]["password"];
+    if(false == $fetch){
+        echo "Веддите данные";
+
+    }
+    foreach ($fetch as $key => $value) {
+
+        $user_name = $fetch[$key]['name'];
+        $user_password = $fetch[$key]["password"];
 //            var_dump($fetch);
-            if ($user_name == $name && $user_password == $password ) {
-                echo "Work";
+        if($user_name == 'admin' && $user_password == $password){
+            header('Location: http://autoriz/admin.php');
+            exit;
 
-            } elseif ($user_name != $name) {
-                echo "Dont WOrk";
-            } else {
-                echo "Я хз че случилось";
-            }
+        }
+        if($user_name == $name && $user_password == $password){
+            header('Location: http://autoriz/user.php');
+            exit;
+
+
+        }
+        if ($user_name == $name) {
+            echo "Имя паравильно введите пароль";
+
+        }else{
+            echo "Имя введено не правильно";
+        }
+        if ($user_password == $password) {
+            echo "Пароль ввели верно";
+        }else{
+            echo"Возможно не верно ввели пароль";
         }
 
-    }else{
-        var_dump($fetch);
-        echo"Не пойму";
-    }
 
-} else {
-    $user_name = '';
-    $user_password = '';
+
+    }
+}
+else {
+    $user_name = "";
+    $user_password = "";
     echo "Введите данные";
 }
 
