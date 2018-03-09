@@ -1,11 +1,25 @@
 <?php
-session_start();
+    session_start();
+
+    if(isset($_SESSION['user']) || isset($_SESSION['admin'])){
+        if(isset($_SESSION['user'])){
+            unset($_SESSION['user']);
+        }
+        if(isset($_SESSION['admin'])){
+            unset($_SESSION['admin']);
+        }
+
+    }
+
 $db = mysqli_connect('localhost', 'root', '');
 mysqli_select_db($db, 'WMI TEst');
 mysqli_query($db, "SET NAMES utf8");
 
 $name = $_POST['name'];
+$_SESSION['name'] = $name;
+$_SESSION['password'] = $_POST['password'];
 $password = md5($_POST['password']);
+
 $sql = "SELECT * FROM reg WHERE `name` = '$name'";
 
 $request = mysqli_query($db, $sql);
@@ -23,11 +37,13 @@ if (count($_POST) > 0) {
         $user_password = $fetch[$key]["password"];
 //            var_dump($fetch);
         if($user_name == 'admin' && $user_password == $password){
+            $_SESSION['admin'] = true;
             header('Location: http://autoriz/admin.php');
             exit;
 
         }
         if($user_name == $name && $user_password == $password){
+            $_SESSION['user'] = true;
             header('Location: http://autoriz/user.php');
             exit;
 
@@ -50,9 +66,9 @@ if (count($_POST) > 0) {
     }
 }
 else {
-    $user_name = "";
-    $user_password = "";
-    echo "Введите данные";
+//    $user_name = "";
+//    $user_password = "";
+    echo "Проверьте правильность введеных данных";
 }
 
 
@@ -69,7 +85,7 @@ else {
 <div class="box">
     <form method="POST">
         <label for="name">Ваше Имя</label><br>
-        <input type="text" id="name" name="name" placeholder="Введите ваше Имя"><br>
+        <input type="text" id="name" name="name" placeholder="Введите ваше Имя" value="<?php echo $_POST['name']?>"><br>
         <label for="password">Ваше Пароль</label><br>
         <input type="password" id="password" name="password"><br>
 
