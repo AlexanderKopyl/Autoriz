@@ -66,8 +66,7 @@ if (count($_POST) > 0) {
     }
 }
 else {
-//    $user_name = "";
-//    $user_password = "";
+
     echo "Проверьте правильность введеных данных";
 }
 
