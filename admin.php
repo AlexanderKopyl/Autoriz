@@ -5,9 +5,6 @@
     exit;
 
 }
-
-
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -22,8 +19,8 @@
 <body>
 <div class="box">
     <ul>
-        <li>Имя пользователя:<?php echo $_SESSION['name'];?></li>
-        <li>Данный Пароль:<?php echo $_SESSION['password'];?> виден  только вам </li>
+        <li>Имя пользователя:<?php echo $_SESSION['name']?></li>
+        <li>Данный Пароль: <?php echo $_SESSION['password']?> виден  только вам </li>
     </ul>
     <a href="index.php">Exit</a>
 </div>
